@@ -8,6 +8,8 @@ set(HEADERS
 )
 
 set(SRC
+    src/uploader.cpp
+    src/uploader_p.h
 )
 
 add_library(qimgupload SHARED ${HEADERS} ${SRC})
@@ -24,8 +26,11 @@ set_target_properties(qimgupload PROPERTIES
 
 target_include_directories(qimgupload PUBLIC
     "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+    "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>"
     "$<INSTALL_INTERFACE:include>"
 )
+
+target_link_libraries(qimgupload Qt5::Network)
 
 install(TARGETS qimgupload
     EXPORT        qimgupload-export
